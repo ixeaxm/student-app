@@ -1,29 +1,93 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
-import styles from './assets/styles/HeaderStyles'
-import Header from './components/Header'
-import appinfo from './data/appinfo'
-import StudentData from './data/StudentData'
-import StudentCrad from './components/StudentCard'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import HomeScreen from './screen/HomeScreen'
+import AllStudentScreen from './screen/AllStudentScreen'
+import MenuScreen from './screen/MenuScreen'
+import SettingScreen from './screen/SettingScreen'
+
+
+const Tab = createBottomTabNavigator()
 
 export default function App() {
   return (
-    <ScrollView style={styles.container}>
-      <Header title={appinfo.title} subtitle={appinfo.subtitle}
-      schoolName={appinfo.schoolName} version={appinfo.verion}/>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: '#f873ffff',
+          tabBarInactiveTintColor: '#999',
+          tabBarStyle: {
+            backgroundColor: '#fff',
+            paddingBottom: 8,
+            paddingTop: 8,
+            heigh: 65,
+            borderTopWidth: 1,
+            borderTopColor: '#ff30b2',
+          },
+          tabBarLabelStyle: {
+            fontSize: 13,
+            fontWeight: '600',
+            marginTop: 2,
+          },
+          headerStyle: {
+            backgroundColor: '#ff70fdff',
+            elevation: 5,
+            shadowOpacity: 0.3,
+            shadowRadius: 5,
+          },
+          headerTintColort: '#fff',
+          headerTintStyle: {
+            fontWeight: 'bold',
+            fontSize: 20,
+          }
+        }}
+      >
 
-      <View style={styles.content}>
-        {StudentData.map((s) => (
-          <StudentCrad
-            key={s.id}
-            emoji={s.emoji}
-            name={s.name}
-            class={s.class}
-            age={s.age}
-            hobby={s.hobby}
-          />
-        ))}
-      </View>
-    </ScrollView>
+        <Tab.Screen
+          name='Home'
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({color, size}) => (
+              <Text style={{ fontSize: size}}>🏠</Text>
+            )
+          }}
+        />
+
+        <Tab.Screen
+          name='ข้อมูลของนักเรียนร่วมห้อง'
+          component={AllStudentScreen}
+          options={{
+            tabBarLabel: 'Allstudent',
+            tabBarIcon: ({color, size}) => (
+              <Text style={{ fontSize: size}}>🧑‍💻</Text>
+            )
+          }}
+        />
+
+        <Tab.Screen
+          name='เมนู'
+          component={MenuScreen}
+          options={{
+            tabBarLabel: 'Menu',
+            tabBarIcon: ({color, size}) => (
+              <Text style={{ fontSize: size}}>💼</Text>
+            )
+          }}
+        />
+
+        <Tab.Screen
+          name='ตั่งค่า'
+          component={SettingScreen}
+          options={{
+            tabBarLabel: 'Setting',
+            tabBarIcon: ({color, size}) => (
+              <Text style={{ fontSize: size}}>💼</Text>
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   )
 }

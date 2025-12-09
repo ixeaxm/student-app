@@ -4,8 +4,11 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#ffffff',
         borderRadius: 15,
-        padding: 20,
+        marginLeft: 20,
+        marginRight: 20,
         marginTop: 20,
+        marginBottom: 20,
+        padding: 20,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
